@@ -2,10 +2,12 @@ pipeline {
     agent any
     stages {
         stage('fetch terraform') {
+            sh """
             wget https://releases.hashicorp.com/terraform/0.12.8/terraform_0.12.8_linux_amd64.zip
             unzip terraform_0.12.8_linux_amd64.zip
             chmod 755 terraform
             ./terraform -version
+            """
         }
         stage('test azure credentials') {
             steps {
